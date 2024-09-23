@@ -173,7 +173,7 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
 //            builder.show();
 //            result.success("success");
             shareSystem(result,msg);
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
