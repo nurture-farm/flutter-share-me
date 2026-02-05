@@ -18,7 +18,6 @@ import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
-import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -34,7 +33,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
  * FlutterShareMePlugin
@@ -58,11 +56,11 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
     /**
      * Plugin registration.
      */
-    public static void registerWith(Registrar registrar) {
-        final FlutterShareMePlugin instance = new FlutterShareMePlugin();
-        instance.onAttachedToEngine(registrar.messenger());
-        instance.activity = registrar.activity();
-    }
+//    public static void registerWith(Registrar registrar) {
+//        final FlutterShareMePlugin instance = new FlutterShareMePlugin();
+//        instance.onAttachedToEngine(registrar.messenger());
+//        instance.activity = registrar.activity();
+//    }
 
     @Override
     public void onAttachedToEngine(FlutterPluginBinding binding) {
@@ -100,7 +98,7 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
             case _methodTwitter:
                 url = call.argument("url");
                 msg = call.argument("msg");
-                shareToTwitter(url, msg, result);
+                //shareToTwitter(url, msg, result);
                 break;
             case _methodWhatsApp:
                 msg = call.argument("msg");
@@ -161,20 +159,20 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
      * @param result Result
      */
 
-    private void shareToTwitter(String url, String msg, Result result) {
-        try {
-            TweetComposer.Builder builder = new TweetComposer.Builder(activity)
-                    .text(msg);
-            if (url != null && url.length() > 0) {
-                builder.url(new URL(url));
-            }
-
-            builder.show();
-            result.success("success");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void shareToTwitter(String url, String msg, Result result) {
+//        try {
+//            TweetComposer.Builder builder = new TweetComposer.Builder(activity)
+//                    .text(msg);
+//            if (url != null && url.length() > 0) {
+//                builder.url(new URL(url));
+//            }
+//
+//            builder.show();
+//            result.success("success");
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * share to Facebook
