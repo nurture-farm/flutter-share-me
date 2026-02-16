@@ -88,7 +88,7 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
      */
     @Override
     public void onMethodCall(MethodCall call, @NonNull Result result) {
-        String url, msg;
+        String url, msg, type;
         switch (call.method) {
             case _methodFaceBook:
                 url = call.argument("url");
@@ -103,12 +103,14 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
             case _methodWhatsApp:
                 msg = call.argument("msg");
                 url = call.argument("url");
-                shareWhatsApp(url, msg, result, false);
+                type = call.argument("type");
+                shareWhatsApp(url, msg, type, result, false);
                 break;
             case _methodWhatsAppBusiness:
                 msg = call.argument("msg");
                 url = call.argument("url");
-                shareWhatsApp(url, msg, result, true);
+                type = call.argument("type");
+                shareWhatsApp(url, msg, type, result, true);
                 break;
             case _methodWhatsAppPersonal:
                 msg = call.argument("msg");
@@ -159,8 +161,8 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
      * @param result Result
      */
 
-//    private void shareToTwitter(String url, String msg, Result result) {
-//        try {
+    private void shareToTwitter(String url, String msg, Result result) {
+        try {
 //            TweetComposer.Builder builder = new TweetComposer.Builder(activity)
 //                    .text(msg);
 //            if (url != null && url.length() > 0) {
@@ -169,10 +171,11 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
 //
 //            builder.show();
 //            result.success("success");
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+            shareSystem(result,msg);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * share to Facebook
@@ -220,15 +223,19 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
      * @param result             Result
      * @param shareToWhatsAppBiz boolean
      */
-    private void shareWhatsApp(String imagePath, String msg, Result result, boolean shareToWhatsAppBiz) {
+    private void shareWhatsApp(String imagePath, String msg, String type, Result result, boolean shareToWhatsAppBiz) {
         try {
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
-            
+
             whatsappIntent.setPackage(shareToWhatsAppBiz ? "com.whatsapp.w4b" : "com.whatsapp");
             whatsappIntent.putExtra(Intent.EXTRA_TEXT, msg);
             // if the url is the not empty then get url of the file and share
             if (!TextUtils.isEmpty(imagePath)) {
-                whatsappIntent.setType("*/*");
+                if (!TextUtils.isEmpty(type)) {
+                    whatsappIntent.setType(type);
+                } else {
+                    whatsappIntent.setType("*/*");
+                }
                 System.out.print(imagePath+"url is not empty");
                 File file = new File(imagePath);
                 Uri fileUri = FileProvider.getUriForFile(activity, activity.getApplicationContext().getPackageName() + ".provider", file);
@@ -251,7 +258,7 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
      * @param msg                String
      * @param result             Result
      */
-    
+
     private void shareToTelegram(String msg, Result result) {
         try {
             Intent telegramIntent = new Intent(Intent.ACTION_SEND);

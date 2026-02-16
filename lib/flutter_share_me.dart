@@ -22,11 +22,11 @@ class FlutterShareMe {
   /// [phoneNumber] enter phone number with counry code
   /// For ios
   /// If include image then text params will be ingored as there is no current way in IOS share both at the same.
-  Future<String?> shareToWhatsApp(
-      {String msg = '', String imagePath = '', FileType? fileType = FileType.image}) async {
+  Future<String?> shareToWhatsApp({String msg = '', String imagePath = '', String? type, FileType? fileType = FileType.image}) async {
     final Map<String, dynamic> arguments = <String, dynamic>{};
     arguments.putIfAbsent('msg', () => msg);
     arguments.putIfAbsent('url', () => imagePath);
+    arguments.putIfAbsent('type', () => type);
     if (fileType == FileType.image) {
       arguments.putIfAbsent('fileType', () => 'image');
     } else {
