@@ -33,7 +33,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
  * FlutterShareMePlugin
@@ -57,11 +56,11 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
     /**
      * Plugin registration.
      */
-    public static void registerWith(Registrar registrar) {
-        final FlutterShareMePlugin instance = new FlutterShareMePlugin();
-        instance.onAttachedToEngine(registrar.messenger());
-        instance.activity = registrar.activity();
-    }
+//    public static void registerWith(Registrar registrar) {
+//        final FlutterShareMePlugin instance = new FlutterShareMePlugin();
+//        instance.onAttachedToEngine(registrar.messenger());
+//        instance.activity = registrar.activity();
+//    }
 
     @Override
     public void onAttachedToEngine(FlutterPluginBinding binding) {
@@ -99,7 +98,7 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
             case _methodTwitter:
                 url = call.argument("url");
                 msg = call.argument("msg");
-                shareToTwitter(url, msg, result);
+                //shareToTwitter(url, msg, result);
                 break;
             case _methodWhatsApp:
                 msg = call.argument("msg");

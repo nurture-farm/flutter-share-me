@@ -23,7 +23,8 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    namespace 'zhuoyuan.li.fluttershareme'
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 16
