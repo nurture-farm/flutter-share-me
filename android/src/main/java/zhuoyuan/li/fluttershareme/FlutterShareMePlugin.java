@@ -161,21 +161,21 @@ public class FlutterShareMePlugin implements MethodCallHandler, FlutterPlugin, A
      * @param result Result
      */
 
-    private void shareToTwitter(String url, String msg, Result result) {
-        try {
-//            TweetComposer.Builder builder = new TweetComposer.Builder(activity)
-//                    .text(msg);
-//            if (url != null && url.length() > 0) {
-//                builder.url(new URL(url));
-//            }
-//
-//            builder.show();
-//            result.success("success");
-            shareSystem(result,msg);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
+//     private void shareToTwitter(String url, String msg, Result result) {
+//         try {
+// //            TweetComposer.Builder builder = new TweetComposer.Builder(activity)
+// //                    .text(msg);
+// //            if (url != null && url.length() > 0) {
+// //                builder.url(new URL(url));
+// //            }
+// //
+// //            builder.show();
+// //            result.success("success");
+//             shareSystem(result,msg);
+//         } catch (MalformedURLException e) {
+//             e.printStackTrace();
+//         }
+//     }
 
     /**
      * share to Facebook
